@@ -167,3 +167,47 @@ that there are no trail references below a certain point into the
 tip of the heap. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+On page 48, the instruction sequence:
+
+    put_structure c/0, Xi
+    set_variable Xi
+
+is to be replaced by a specialized instruction set_constant c.
+
+This is incorrect, it is the sequence:
+
+    put_structure c/0, Xi
+    set_value Xi
+
+that can be replaced by set_constant c.
+
+Further to this, the exact details of when this substitution, and the one
+on the previous page can be applied are not fully described. The previous
+page has the substitution:
+
+    unify_variable Xi
+    get_structure c/0, Xi
+
+being replaced by unify_constant c.
+
+These two substitutions are to be applied only when the constant appears in
+a non-argument position (hence the X register, instead of an A register).
+Also, these instructions do not have to occurr consecutively in a clause,
+they can be separated by other instructions. The unify_constant instruction
+should be placed where the unify_variable instruction was. The set_constant
+instruction should be placed where the set_variable instruction was.
+
+The substitutions could be more accurately described by:
+
+    put_structure c/0, Xi
+    ...
+    set_value Xi          -> set_constant c
+
+and 
+
+    unify_variable Xi     -> unify_constant c
+    ...
+    get_structure c/0, Xi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
