@@ -211,3 +211,7 @@ and
     get_structure c/0, Xi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A return value of deref(Xn) is undefined when Xn's value does not have a REF tag. So, we must check a tag of Xn's value at the beggining of 'set_local_value Xn' and 'unify_local_value Xn' instruction.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
