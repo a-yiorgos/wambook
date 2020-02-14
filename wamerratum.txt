@@ -149,7 +149,7 @@ one should use code like
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The try, retry, and trust instructions reset the HB register to an 
+The trust_me and trust instructions reset the HB register to an
 incorrect value. The problem is that n is computed from the original 
 value of B (n <- STACK[B]). Hence n is no longer valid when HB is 
 re-loaded. The correct code is: 
